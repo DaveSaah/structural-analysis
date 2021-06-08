@@ -28,4 +28,4 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 ## Live Demo - Deployed with netlify
-[Structural Analysis live demo](structuralanalysis.netlify.app)
+[Structural Analysis live demo](https://structuralanalysis.netlify.app)
