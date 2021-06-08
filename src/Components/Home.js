@@ -1,35 +1,22 @@
 import { Component } from "react";
 
 
-// myForm.addEventListener("submit", onsubmit);
-
-// function onsubmit(e) {
-//     e.preventDefault();
-//     if(nameInput.value === "" || emailInput.value === ""){
-//         msg.innerHTML = "Please enter all fields!";
-//         setTimeout(() => msg.remove(), 3000);
-//     }
-//     else {
-//         const li = document.createElement("li");
-//         li.appendChild(document.createTextNode(`${nameInput.value}: ${emailInput.value}`));
-
-//         userList.appendChild(li);
-
-//         //Clear fields
-//         nameInput.value = "";
-//         emailInput.value = "";
-//     }
-// }
-
-
 class Home extends Component {
     constructor(props) {
         super(props)
-        this.state = { width: '', height: '', load: '', slenderness_limit: 50, maximum_allowable_stress: 1450, E: 1700000,  }
+        this.state = {
+            width: '',
+            height: '',
+            load: '',
+            slenderness_limit: 50,
+            maximum_allowable_stress: 1450,
+            E: 1700000,
+        }
 
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.clearContent = this.clearContent.bind(this)
     }
 
     handleChange(event) {
@@ -44,7 +31,25 @@ class Home extends Component {
         let width = this.state.width
         let height = this.state.height
         let slenderness = height / width
-        console.log(slenderness, this.state.slenderness_limit)
+
+        if (slenderness <= this.state.slenderness_limit) {
+            return (
+                `<div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Passed slenderness test!</h4>
+            </div>`
+            )
+        } else {
+            return (
+                `<div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Failed slenderness test!</h4>
+                <p>Possible solutions:</p>
+                <ul>
+                    <li>Increase the width</li>
+                    <li>Reduce the height</li>
+                </ul>
+            </div>`
+            )
+        }
     }
 
     test_2() {
@@ -54,23 +59,74 @@ class Home extends Component {
         let area = width ** 2
         let slenderness = height / width
 
-        console.log(load, slenderness, area)
+        if (load <= (0.3 * this.state.E * area) / slenderness ** 2) {
+            return (
+                `<div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Passed second test!</h4>
+                </div>`
+            )
+        } else {
+            return (
+                `<div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading">Failed second test!</h4>
+                    <p>Possible solutions:</p>
+                    <ul>
+                        <li>Increase the width</li>
+                        <li>Reduce the height</li>
+                    </ul>
+                </div>`
+            )
+        }
     }
 
     max_load() {
         let area = this.state.width ** 2
-        console.log(this.state.load, area, this.state.maximum_allowable_stress)
+
+        if (this.state.load <= area * this.state.maximum_allowable_stress) {
+            return (
+                `<div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Passed maximum load test!</h4>
+                </div>`
+            )
+        } else {
+            return (
+                `<div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading">Failed second test!</h4>
+                    <p>Possible solutions:</p>
+                    <ul>
+                        <li>Increase the width</li>
+                    </ul>
+                </div>`
+            )
+        }
     }
 
     handleSubmit(event) {
-        // let results = document.querySelector(".results")
+        let clearBtn = document.querySelector("#clear")
+        let slender = document.querySelector("#slenderness")
+        let test2 = document.querySelector("#test-2")
+        let maxLoad = document.querySelector("#max-load")
 
-        this.slender_test()
-        this.test_2()
-        this.max_load()
+        clearBtn.classList.remove("invisible")
 
-        // results.innerHTML = 
+        slender.innerHTML = this.slender_test()
+        test2.innerHTML = this.test_2()
+        maxLoad.innerHTML = this.max_load()
+
         event.preventDefault()
+    }
+
+    clearContent(event) {
+        let clearBtn = document.querySelector("#clear")
+        let results = document.querySelector("#results")
+        results.innerHTML = ''
+
+        event.preventDefault()
+        this.setState({
+            width: '', height: '', load: ''
+        })
+
+        clearBtn.classList.add("invisible")
     }
 
     render() {
@@ -95,7 +151,12 @@ class Home extends Component {
                     </form>
                 </div>
                 <br /><br />
-                <div className="results"></div>
+                <div id="results">
+                    <div id="slenderness"></div>
+                    <div id="test-2"></div>
+                    <div id="max-load"></div>
+                </div><br />
+                <button id="clear" className="invisible btn btn-lg btn-secondary" onClick={this.clearContent}>Clear data</button>
             </div>
         )
     }
