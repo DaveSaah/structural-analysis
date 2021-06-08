@@ -35,13 +35,13 @@ class Home extends Component {
         if (slenderness <= this.state.slenderness_limit) {
             return (
                 `<div class="alert alert-success" role="alert">
-                <h4 class="alert-heading">Passed slenderness test!</h4>
+                <h4>Passed slenderness test!</h4>
             </div>`
             )
         } else {
             return (
                 `<div class="alert alert-danger" role="alert">
-                <h4 class="alert-heading">Failed slenderness test!</h4>
+                <h4>Failed slenderness test!</h4>
                 <p>Possible solutions:</p>
                 <ul>
                     <li>Increase the width</li>
@@ -62,13 +62,13 @@ class Home extends Component {
         if (load <= (0.3 * this.state.E * area) / slenderness ** 2) {
             return (
                 `<div class="alert alert-success" role="alert">
-                    <h4 class="alert-heading">Passed second test!</h4>
+                    <h4>Passed second test!</h4>
                 </div>`
             )
         } else {
             return (
                 `<div class="alert alert-danger" role="alert">
-                    <h4 class="alert-heading">Failed second test!</h4>
+                    <h4>Failed second test!</h4>
                     <p>Possible solutions:</p>
                     <ul>
                         <li>Increase the width</li>
@@ -85,13 +85,13 @@ class Home extends Component {
         if (this.state.load <= area * this.state.maximum_allowable_stress) {
             return (
                 `<div class="alert alert-success" role="alert">
-                    <h4 class="alert-heading">Passed maximum load test!</h4>
+                    <h4>Passed maximum load test!</h4>
                 </div>`
             )
         } else {
             return (
                 `<div class="alert alert-danger" role="alert">
-                    <h4 class="alert-heading">Failed second test!</h4>
+                    <h4>Failed second test!</h4>
                     <p>Possible solutions:</p>
                     <ul>
                         <li>Increase the width</li>
