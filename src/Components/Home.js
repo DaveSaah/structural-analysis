@@ -91,7 +91,7 @@ class Home extends Component {
         } else {
             return (
                 `<div class="alert alert-danger" role="alert">
-                    <h4>Failed second test!</h4>
+                    <h4>Failed maximum load test!</h4>
                     <p>Possible solutions:</p>
                     <ul>
                         <li>Increase the width</li>
