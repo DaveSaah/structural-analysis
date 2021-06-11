@@ -2,6 +2,17 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+* This web app provides an interface to receive width and height of a structure and also the expected load on it. 
+* This checks the integrity of the structure. 
+
+## Live Demo - Deployed with netlify
+[Structural Analysis live demo](https://structuralanalysis.netlify.app)
+
+
+
+
+
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -27,5 +38,3 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-## Live Demo - Deployed with netlify
-[Structural Analysis live demo](https://structuralanalysis.netlify.app)
